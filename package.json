@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "deep-thoughts",
   "version": "1.0.0",
   "description": "",
@@ -23,5 +24,10 @@
   "homepage": "https://github.com/benkaan001/deep-thoughts#readme",
   "devDependencies": {
     "concurrently": "^6.5.1"
+=======
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "jsonwebtoken": "^8.5.1"
+>>>>>>> main
   }
 }
