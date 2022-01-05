@@ -1,11 +1,6 @@
-const { User, Thought } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
+const { User, Thought } = require('../models');
 const { signToken } = require('../utils/auth');
-
-// we set up the resolver that will serve the response for the query
-
-// ---> (-__v -password) is used to omit the Mongoose-specific __v property and users' password
-// ---> we are also populating friends and thoughts
 
 const resolvers = {
   Query: {
@@ -39,7 +34,7 @@ const resolvers = {
     },
     thought: async (parent, { _id }) => {
       return Thought.findOne({ _id });
-    },
+    }
   },
 
   Mutation: {
@@ -67,10 +62,7 @@ const resolvers = {
     },
     addThought: async (parent, args, context) => {
       if (context.user) {
-        const thought = await Thought.create({
-          ...args,
-          username: context.user.username,
-        });
+        const thought = await Thought.create({ ...args, username: context.user.username });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -87,11 +79,7 @@ const resolvers = {
       if (context.user) {
         const updatedThought = await Thought.findOneAndUpdate(
           { _id: thoughtId },
-          {
-            $push: {
-              reactions: { reactionBody, username: context.user.username },
-            },
-          },
+          { $push: { reactions: { reactionBody, username: context.user.username } } },
           { new: true, runValidators: true }
         );
 
@@ -112,8 +100,8 @@ const resolvers = {
       }
 
       throw new AuthenticationError('You need to be logged in!');
-    },
-  },
+    }
+  }
 };
 
 module.exports = resolvers;

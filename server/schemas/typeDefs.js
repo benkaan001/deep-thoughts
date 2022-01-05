@@ -1,11 +1,3 @@
-// the qql tagged template function makes the tagged templates a bit more understandable and explicit
-
-// both mutations will return a User object - the User who either has successfully
-// logged in or twho was just created on signup. --> ! indicates a required argument.
-
-// --> This means that an Auth type must return a token and can optionally include any
-//other user data. Update the two mutations to return an Auth object instead of a User object.
-
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
